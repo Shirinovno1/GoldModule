@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+</head>
+<body>
+    <canvas id="canvas" width="32" height="32"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Gold background
+        ctx.fillStyle = '#D4AF37';
+        ctx.fillRect(0, 0, 32, 32);
+        
+        // White diamond shape
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        ctx.moveTo(16, 4);
+        ctx.lineTo(24, 12);
+        ctx.lineTo(16, 20);
+        ctx.lineTo(8, 12);
+        ctx.closePath();
+        ctx.fill();
+        
+        // SG text
+        ctx.fillStyle = '#D4AF37';
+        ctx.font = 'bold 8px serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('SG', 16, 28);
+        
+        // Download as PNG
+        const link = document.createElement('a');
+        link.download = 'favicon-32x32.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    </script>
+</body>
+</html>

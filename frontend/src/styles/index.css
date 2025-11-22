@@ -1,0 +1,771 @@
+/* Google Fonts - Supports Azerbaijani */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theming - Ultra Premium Colors */
+:root {
+  --color-primary: #D4AF37;
+  --color-accent: #C5A572;
+  --color-background-light: #F5F5F0;
+  --color-background-dark: #000000;
+  --color-text-light: #1A1A1A;
+  --color-text-dark: #FFFFFF;
+  --color-surface-light: #FFFFFF;
+  --color-surface-dark: #000000;
+  
+  /* Animation durations */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  
+  /* Easing functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Material Symbols Configuration */
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+html {
+  background: #FFFFFF;
+  color: #1A1A1A;
+}
+
+html.dark {
+  background: #000000 !important;
+  color: #FFFFFF;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #FFFFFF;
+  min-height: 100vh;
+  color: #1A1A1A;
+}
+
+.dark body {
+  background: #000000 !important;
+  color: #FFFFFF;
+}
+
+/* Ensure root element has proper background */
+#root {
+  background: #FFFFFF;
+  min-height: 100vh;
+}
+
+.dark #root {
+  background: #000000 !important;
+}
+
+/* Force black background in dark mode */
+.dark, .dark * {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.dark section, .dark div, .dark main, .dark aside {
+  background-color: transparent !important;
+}
+
+.dark .premium-bg-light {
+  background: #000000 !important;
+}
+
+.dark .premium-bg-dark {
+  background: #000000 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 169, 97, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(201, 169, 97, 0.6);
+  }
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn var(--duration-slow) var(--ease-out);
+}
+
+.slide-up {
+  animation: slideUp var(--duration-slow) var(--ease-out);
+}
+
+.slide-down {
+  animation: slideDown var(--duration-slow) var(--ease-out);
+}
+
+.slide-left {
+  animation: slideLeft var(--duration-slow) var(--ease-out);
+}
+
+.slide-right {
+  animation: slideRight var(--duration-slow) var(--ease-out);
+}
+
+.scale-in {
+  animation: scaleIn var(--duration-normal) var(--ease-out);
+}
+
+.scale-up {
+  animation: scaleUp var(--duration-slow) var(--ease-bounce);
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Stagger animations */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Scroll reveal animations */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scroll-reveal {
+  opacity: 0;
+  animation: reveal 0.8s ease-out forwards;
+}
+
+.scroll-reveal-left {
+  opacity: 0;
+  animation: revealLeft 0.8s ease-out forwards;
+}
+
+.scroll-reveal-right {
+  opacity: 0;
+  animation: revealRight 0.8s ease-out forwards;
+}
+
+.scroll-zoom {
+  opacity: 0;
+  animation: zoomIn 0.8s ease-out forwards;
+}
+
+/* Parallax effect */
+.parallax {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.parallax:hover {
+  transform: translateZ(20px) scale(1.05);
+}
+
+/* Utility classes */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Premium Hover effects */
+.hover-lift {
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3);
+}
+
+.dark .hover-lift:hover {
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.4);
+}
+
+.hover-scale {
+  transition: transform var(--duration-normal) var(--ease-bounce);
+}
+
+.hover-scale:hover {
+  transform: scale(1.08);
+}
+
+.hover-glow {
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+  transform: scale(1.03);
+}
+
+/* Premium button styles */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-premium:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-premium:active {
+  transform: scale(0.95);
+}
+
+/* Ultra Premium Glass morphism */
+.glass {
+  background: #FFFFFF;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: #1A1A1A;
+}
+
+.dark .glass {
+  background: #000000;
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+  color: #FFFFFF;
+}
+
+.glass-strong {
+  background: #FFFFFF;
+  border: 2px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  color: #1A1A1A;
+}
+
+.dark .glass-strong {
+  background: #000000;
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 12px 48px rgba(212, 175, 55, 0.25);
+  color: #FFFFFF;
+}
+
+/* Ultra Premium background patterns */
+.premium-bg-light {
+  background: #FFFFFF;
+  color: #1A1A1A;
+}
+
+.premium-bg-dark {
+  background: #000000 !important;
+  color: #FFFFFF;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .glass {
+    background: #FFFFFF;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    color: #1A1A1A;
+  }
+  
+  .dark .glass {
+    background: #000000;
+    border: 2px solid rgba(212, 175, 55, 0.5);
+    box-shadow: 0 4px 16px rgba(212, 175, 55, 0.2);
+    color: #FFFFFF;
+  }
+  
+  /* Better touch targets */
+  button, a {
+    min-height: 48px;
+  }
+  
+  /* Ensure no white spaces on mobile */
+  html.dark, body.dark, .dark * {
+    background-color: transparent;
+  }
+  
+  html.dark, body.dark {
+    background: #000000 !important;
+  }
+  
+  .dark .premium-bg-light {
+    background: #000000 !important;
+  }
+  
+  .dark .premium-bg-dark {
+    background: #000000 !important;
+  }
+  
+  /* Better mobile text sizing */
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  h2 {
+    font-size: 1.75rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  /* Better mobile padding */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Mobile cards */
+  .glass {
+    padding: 1.5rem !important;
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile buttons */
+  button, .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Prevent text selection on buttons */
+button {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth font rendering */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Better form inputs for light mode */
+input, textarea, select {
+  color: #1A1A1A;
+}
+
+.dark input, .dark textarea, .dark select {
+  color: #FFFFFF;
+}
+
+/* Ensure text is readable in light mode */
+.text-gray-900 {
+  color: #1A1A1A !important;
+}
+
+.text-gray-800 {
+  color: #2D2D2D !important;
+}
+
+.text-gray-700 {
+  color: #404040 !important;
+}
+
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-700 {
+  color: #FFFFFF !important;
+}
+
+/* Better contrast for light mode cards */
+.bg-white {
+  background-color: #FFFFFF !important;
+  color: #1A1A1A !important;
+}
+
+.dark .bg-white {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+/* Additional mobile improvements */
+@media (max-width: 640px) {
+  /* Hero section mobile */
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  /* Mobile hero text */
+  .text-5xl, .text-6xl, .text-7xl, .text-8xl {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .text-xl, .text-2xl {
+    font-size: 1.125rem !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Mobile grid improvements */
+  .grid {
+    gap: 1rem !important;
+  }
+  
+  /* Mobile product cards */
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+  
+  /* Mobile contact buttons */
+  .inline-flex {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Mobile spacing */
+  .mb-6, .mb-8, .mb-12, .mb-16, .mb-20 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mt-6, .mt-8, .mt-12, .mt-16, .mt-20 {
+    margin-top: 2rem !important;
+  }
+  
+  /* Mobile text readability */
+  p, span, div {
+    color: inherit;
+  }
+  
+  .text-white {
+    color: #FFFFFF !important;
+  }
+  
+  .dark .text-white {
+    color: #FFFFFF !important;
+  }
+  
+  /* Mobile glass effect - ensure readability */
+  .glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  /* Mobile menu improvements */
+  nav a {
+    display: block;
+    width: 100%;
+  }
+  
+  /* Better mobile shadows */
+  .shadow-lg, .shadow-xl, .shadow-2xl {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .dark .shadow-lg, .dark .shadow-xl, .dark .shadow-2xl {
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2) !important;
+  }
+}
+
+/* Tablet improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .text-5xl, .text-6xl, .text-7xl, .text-8xl {
+    font-size: 3rem !important;
+  }
+  
+  .text-xl, .text-2xl {
+    font-size: 1.5rem !important;
+  }
+}
+/* Ensure no dark spaces in light mode */
+.bg-transparent {
+  background: transparent !important;
+}
+
+/* Force white background in light mode for main content areas */
+main, section, article, .main-content {
+  background: #FFFFFF;
+}
+
+.dark main, .dark section, .dark article, .dark .main-content {
+  background: #000000 !important;
+}
+
+/* Ensure proper background inheritance */
+* {
+  background-color: inherit;
+}
+
+/* Override any transparent backgrounds in light mode */
+:not(.dark) .bg-transparent {
+  background: #FFFFFF !important;
+}
+
+:not(.dark) section[style*="transparent"] {
+  background: #FFFFFF !important;
+}
+
+/* Ensure all containers have proper background */
+.container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl {
+  background: inherit;
+}
