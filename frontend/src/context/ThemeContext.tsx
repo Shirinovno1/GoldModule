@@ -6,12 +6,16 @@ interface ThemeContextType {
   theme: ThemeConfig;
   loading: boolean;
   error: string | null;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType>({
   theme: defaultTheme,
   loading: true,
   error: null,
+  darkMode: true,
+  toggleDarkMode: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
@@ -20,6 +24,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<ThemeConfig>(defaultTheme);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const loadTheme = async () => {
@@ -41,12 +46,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, []);
 
   useEffect(() => {
-    // Always apply dark mode
-    document.documentElement.classList.add('dark');
-  }, []);
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme, loading, error }}>
+    <ThemeContext.Provider value={{ theme, loading, error, darkMode, toggleDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );
