@@ -8,13 +8,15 @@ export interface TokenPayload {
 }
 
 export const generateAccessToken = (payload: TokenPayload): string => {
-  return jwt.sign(payload, config.jwtSecret, {
+  // Cast through any to avoid strict type issues with jsonwebtoken overloads
+  return (jwt as any).sign(payload, config.jwtSecret, {
     expiresIn: config.jwtExpiresIn,
   });
 };
 
 export const generateRefreshToken = (payload: TokenPayload): string => {
-  return jwt.sign(payload, config.jwtRefreshSecret, {
+  // Cast through any to avoid strict type issues with jsonwebtoken overloads
+  return (jwt as any).sign(payload, config.jwtRefreshSecret, {
     expiresIn: config.jwtRefreshExpiresIn,
   });
 };
