@@ -112,7 +112,7 @@ router.get('/:id', async (req, res: Response) => {
     }
 
     // Increment view count
-    await product.incrementViewCount();
+    await (product as any).incrementViewCount();
 
     res.json({
       success: true,

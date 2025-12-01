@@ -20,7 +20,7 @@ const seed = async () => {
     }
 
     // Initialize configuration
-    const config = await Configuration.getInstance();
+    const config = await (Configuration as any).getInstance();
     console.log('✅ Configuration initialized');
     console.log(`   Business: ${config.businessName}`);
 

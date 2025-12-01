@@ -112,7 +112,7 @@ CustomerSessionSchema.methods.addEvent = async function(event: Omit<IEvent, 'tim
 
 // Method to get event count by type
 CustomerSessionSchema.methods.getEventCount = function(eventType: string): number {
-  return this.events.filter(e => e.type === eventType).length;
+  return this.events.filter((e: IEvent) => e.type === eventType).length;
 };
 
 // Static method to create or update session
@@ -145,13 +145,13 @@ CustomerSessionSchema.statics.getAnalytics = async function(startDate: Date, end
   });
 
   const totalSessions = sessions.length;
-  const uniqueVisitors = new Set(sessions.map(s => s.ipAddress)).size;
+  const uniqueVisitors = new Set(sessions.map((s: ICustomerSession) => s.ipAddress)).size;
   
   let totalPageViews = 0;
   let totalProductViews = 0;
   let totalInquiries = 0;
 
-  sessions.forEach(session => {
+  sessions.forEach((session: ICustomerSession) => {
     totalPageViews += session.getEventCount('page_view');
     totalProductViews += session.getEventCount('product_view');
     totalInquiries += session.getEventCount('inquiry_initiated');

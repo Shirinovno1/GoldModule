@@ -24,7 +24,7 @@ router.post('/login', loginLimiter, async (req, res: Response) => {
     }
 
     // Find user with password
-    const user = await AdminUser.findByEmailWithPassword(email);
+    const user = await (AdminUser as any).findByEmailWithPassword(email);
 
     if (!user) {
       return res.status(401).json({
