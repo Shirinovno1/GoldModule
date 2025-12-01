@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IProductImage {
   original: string;
@@ -20,8 +20,15 @@ export interface IProduct extends Document {
   status: 'active' | 'draft' | 'archived';
   viewCount: number;
   inquiryCount: number;
+  incrementViewCount(): Promise<IProduct>;
+  incrementInquiryCount(): Promise<IProduct>;
   createdAt: Date;
   updatedAt: Date;
+}
+
+interface IProductModel extends Model<IProduct> {
+  getFeatured(limit?: number): Promise<IProduct[]>;
+  search(query: string, filters?: any): Promise<IProduct[]>;
 }
 
 const ProductImageSchema = new Schema({
@@ -115,26 +122,26 @@ ProductSchema.virtual('primaryImage').get(function() {
 });
 
 // Method to increment view count
-ProductSchema.methods.incrementViewCount = async function() {
+ProductSchema.methods.incrementViewCount = async function(this: IProduct) {
   this.viewCount += 1;
   return this.save();
 };
 
 // Method to increment inquiry count
-ProductSchema.methods.incrementInquiryCount = async function() {
+ProductSchema.methods.incrementInquiryCount = async function(this: IProduct) {
   this.inquiryCount += 1;
   return this.save();
 };
 
 // Static method to get featured products
-ProductSchema.statics.getFeatured = function(limit: number = 8) {
+ProductSchema.statics.getFeatured = function(this: IProductModel, limit: number = 8) {
   return this.find({ featured: true, status: 'active' })
     .sort({ createdAt: -1 })
     .limit(limit);
 };
 
 // Static method to search products
-ProductSchema.statics.search = function(query: string, filters: any = {}) {
+ProductSchema.statics.search = function(this: IProductModel, query: string, filters: any = {}) {
   const searchQuery: any = {
     $text: { $search: query },
     status: 'active',
@@ -145,6 +152,6 @@ ProductSchema.statics.search = function(query: string, filters: any = {}) {
     .sort({ score: { $meta: 'textScore' } });
 };
 
-const Product = mongoose.model<IProduct>('Product', ProductSchema);
+const Product = mongoose.model<IProduct, IProductModel>('Product', ProductSchema);
 
 export default Product;

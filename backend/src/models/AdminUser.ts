@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 export interface IAdminUser extends Document {
@@ -12,6 +12,10 @@ export interface IAdminUser extends Document {
   createdAt: Date;
   updatedAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
+}
+
+interface IAdminUserModel extends Model<IAdminUser> {
+  findByEmailWithPassword(email: string): Promise<IAdminUser | null>;
 }
 
 const AdminUserSchema = new Schema<IAdminUser>({
@@ -83,13 +87,13 @@ AdminUserSchema.methods.comparePassword = async function(candidatePassword: stri
 };
 
 // Method to update last login
-AdminUserSchema.methods.updateLastLogin = async function() {
+AdminUserSchema.methods.updateLastLogin = async function(this: IAdminUser) {
   this.lastLogin = new Date();
   return this.save();
 };
 
 // Static method to find by email with password
-AdminUserSchema.statics.findByEmailWithPassword = function(email: string) {
+AdminUserSchema.statics.findByEmailWithPassword = function(this: IAdminUserModel, email: string) {
   return this.findOne({ email, isActive: true }).select('+passwordHash');
 };
 
@@ -100,6 +104,6 @@ AdminUserSchema.methods.toJSON = function() {
   return obj;
 };
 
-const AdminUser = mongoose.model<IAdminUser>('AdminUser', AdminUserSchema);
+const AdminUser = mongoose.model<IAdminUser, IAdminUserModel>('AdminUser', AdminUserSchema);
 
 export default AdminUser;

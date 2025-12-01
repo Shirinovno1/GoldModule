@@ -1,9 +1,14 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface ILogo {
   url: string;
   width: number;
   height: number;
+}
+
+interface IConfigurationModel extends Model<IConfiguration> {
+  getInstance(): Promise<IConfiguration>;
+  updateInstance(updates: Partial<IConfiguration>, updatedBy: mongoose.Types.ObjectId): Promise<IConfiguration>;
 }
 
 export interface IColors {
@@ -152,7 +157,7 @@ ConfigurationSchema.pre('save', async function(next) {
 });
 
 // Static method to get the configuration (singleton)
-ConfigurationSchema.statics.getInstance = async function() {
+ConfigurationSchema.statics.getInstance = async function(this: IConfigurationModel) {
   let config = await this.findOne();
   
   if (!config) {
@@ -188,13 +193,13 @@ ConfigurationSchema.statics.getInstance = async function() {
 };
 
 // Static method to update configuration
-ConfigurationSchema.statics.updateInstance = async function(updates: Partial<IConfiguration>, updatedBy: mongoose.Types.ObjectId) {
+ConfigurationSchema.statics.updateInstance = async function(this: IConfigurationModel, updates: Partial<IConfiguration>, updatedBy: mongoose.Types.ObjectId) {
   const config = await this.getInstance();
   Object.assign(config, updates);
   config.updatedBy = updatedBy;
   return config.save();
 };
 
-const Configuration = mongoose.model<IConfiguration>('Configuration', ConfigurationSchema);
+const Configuration = mongoose.model<IConfiguration, IConfigurationModel>('Configuration', ConfigurationSchema);
 
 export default Configuration;

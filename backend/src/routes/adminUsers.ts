@@ -20,7 +20,7 @@ router.get('/', authenticate, async (req: AuthRequest, res: Response) => {
       });
     }
 
-    const users = await AdminUser.find({}, '-password').sort({ createdAt: -1 });
+    const users = await AdminUser.find({}, '-passwordHash').sort({ createdAt: -1 });
 
     res.json({
       success: true,

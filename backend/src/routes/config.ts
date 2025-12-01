@@ -43,7 +43,7 @@ const logoUpload = multer({
 // GET /api/config or /api/admin/config - Get configuration
 router.get('/', async (req, res: Response) => {
   try {
-    const config = await Configuration.getInstance();
+    const config = await (Configuration as any).getInstance();
 
     res.json({
       businessName: config.businessName,

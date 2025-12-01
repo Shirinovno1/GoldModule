@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IHeroContent {
   backgroundImage: string;
@@ -6,6 +6,11 @@ export interface IHeroContent {
   subheadline: string;
   ctaText: string;
   description?: string;
+}
+
+interface IContentModel extends Model<IContent> {
+  getSection(section: string): Promise<IContent>;
+  updateSection(section: string, data: ContentData, updatedBy: mongoose.Types.ObjectId): Promise<IContent>;
 }
 
 export interface IAboutContent {
@@ -117,7 +122,7 @@ ContentSchema.pre('save', function(next) {
 });
 
 // Static method to get or create content section
-ContentSchema.statics.getSection = async function(section: string) {
+ContentSchema.statics.getSection = async function(this: IContentModel, section: string) {
   let content = await this.findOne({ section });
   
   if (!content) {
@@ -134,6 +139,7 @@ ContentSchema.statics.getSection = async function(section: string) {
 
 // Static method to update content section
 ContentSchema.statics.updateSection = async function(
+  this: IContentModel,
   section: string,
   data: ContentData,
   updatedBy: mongoose.Types.ObjectId
@@ -181,6 +187,6 @@ function getDefaultContent(section: string): ContentData {
   }
 }
 
-const Content = mongoose.model<IContent>('Content', ContentSchema);
+const Content = mongoose.model<IContent, IContentModel>('Content', ContentSchema);
 
 export default Content;
